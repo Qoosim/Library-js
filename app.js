@@ -14,7 +14,14 @@ const book = ({
   };
 
   const removeBook = () => {
-    console.log(`${bookId} - will be removed.`);
+    const currentBookIndex = myLibrary.indexOf({ bookId, title });
+    myLibrary.splice(currentBookIndex, 1);
+    const bookList = document.querySelector('.books-list');
+    bookList.innerHTML = null;
+    myLibrary.forEach((libraryBook) => {
+      const storedBook = book(libraryBook);
+      storedBook.render();
+    });
   };
 
   const render = () => {
@@ -31,7 +38,7 @@ const book = ({
       e.preventDefault();
       removeBook();
     });
-    deleteLink.innerHTML = 'Remove';
+    deleteLink.innerHTML = 'X';
 
     mainRow.appendChild(deleteLink);
     bookList.appendChild(mainRow);
@@ -41,6 +48,8 @@ const book = ({
 };
 
 const renderBooksToTable = () => {
+  const bookList = document.querySelector('.books-list');
+  bookList.innerHTML = null;
   myLibrary.forEach((libraryBook) => {
     const storedBook = book(libraryBook);
     storedBook.render();
