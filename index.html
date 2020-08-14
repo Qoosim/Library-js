@@ -17,20 +17,16 @@
           </div>
           <form class="form-inline" id="bookValues">
             <div class="form-group mx-sm-1 mb-2">
-                <label for="text" class="sr-only">Title</label>
-                <input type="text" class="form-control" id="text" placeholder="Title">
+                <label for="title" class="sr-only">Title</label>
+                <input type="text" class="form-control" name = "title" id="title" placeholder="Title" required>
               </div>
               <div class="form-group mx-sm-1 mb-2">
-                <label for="text" class="sr-only">Author</label>
-                <input type="text" class="form-control" id="text" placeholder="Author">
+                <label for="author" class="sr-only">Author</label>
+                <input type="text" class="form-control" name = "author" id="author" placeholder="Author" required>
               </div>
             <div class="form-group mx-sm-1 mb-2">
-              <label for="text" class="sr-only">Pages</label>
-              <input type="text" class="form-control" id="text" placeholder="Pages">
-            </div>
-            <div class="form-group mx-sm-1 mb-2">
-                <label for="text" class="sr-only">Pages</label>
-                <input type="text" class="form-control" id="text" placeholder="Pages">
+              <label for="pages" class="sr-only">Pages</label>
+              <input type="text" class="form-control" id="pages" name="pages" placeholder="Pages"  required>
             </div>
             <button type="submit" class="btn btn-primary mb-2">NEW BOOK</button>
           </form>
@@ -45,14 +41,6 @@
               </tr>
             </thead>
             <tbody class = 'books-list'>
-              <tr>
-                <th scope="row">1</th>
-                <td>1</td>
-                <td>The Gift</td>
-                <td>Danielle Steele</td>
-                <td>376</td>
-                <td></td>
-              </tr>
 
             </tbody>
           </table>

@@ -1,53 +1,72 @@
-let myLibrary = [];
+// Starting with default values. Simulating Database
+const myLibrary = [{
+  bookId: 99, title: 'The Gift', author: 'Danielle Steele', pages: 5,
+}];
 
-const book = (bookId, title, author) => {
+const book = ({
+  bookId, title, author, pages,
+}) => {
+  const updateRow = (mainRow, innerHTMLText) => {
+    const cell = document.createElement('td');
 
-    const render = () => {
-        let bookList = document.querySelector('.books-list');
-        let mainRow = document.createElement('tr');
+    cell.innerHTML = innerHTMLText;
+    mainRow.appendChild(cell);
+  };
 
-        let cell = document.createElement('td');
-        cell.innerHTML = bookId;
-        mainRow.appendChild(cell);
+  const removeBook = () => {
+    console.log(`${bookId} - will be removed.`);
+  };
 
-        cell = document.createElement('td');
-        cell.innerHTML = title;
-        mainRow.appendChild(cell);
-        
-        cell = document.createElement('td');
-        cell.innerHTML = author;
-        mainRow.appendChild(cell);
+  const render = () => {
+    const bookList = document.querySelector('.books-list');
+    const mainRow = document.createElement('tr');
+    // Loop through args to create a row.
+    [bookId, title, author, pages].forEach(v => {
+      updateRow(mainRow, v);
+    });
+    const deleteLink = document.createElement('a');
+    // Add multiple classes - to classList https://stackoverflow.com/a/14432191
+    deleteLink.classList.add('btn', 'btn-danger', 'my-2');
+    deleteLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      removeBook();
+    });
+    deleteLink.innerHTML = 'Remove';
 
-        console.log(typeof bookList);
-        bookList.appendChild(mainRow);
-    }
+    mainRow.appendChild(deleteLink);
+    bookList.appendChild(mainRow);
+  };
 
+  return { render };
+};
 
-    return { title, author, render };
+const renderBooksToTable = () => {
+  myLibrary.forEach((libraryBook) => {
+    const storedBook = book(libraryBook);
+    storedBook.render();
+  });
+};
+
+renderBooksToTable();
+
+const addBookToLibrary = (
+  bookId, title, author, pages,
+) => {
+  const currBook = book({
+    bookId, title, author, pages,
+  });
+  myLibrary.push(currBook);
+  currBook.render();
 };
 
 
-const addBookToLibrary = (bookId, title, author) => {
-    let b = book(bookId, title, author);
-    myLibrary.push(b);
-}
-
-const renderToTable = () => {
-  myLibrary.forEach((book) => {
-      book.render();
-  });
-}
-
-// const form = document.forms.bookValues
-const form = document.querySelector('form');
+const form = document.querySelector('.form-inline');
 form.onsubmit = (e) => {
-    e.preventDefault();
-    const c = Object.values(form).reduce((obj, field) => { obj[field.name] = field.value; return obj; }, {});
-    console.log(c);
-}
-
-
-
-const removeFromLibrary = (t) => {
-
-}
+  // Dont allow default actions - https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+  e.preventDefault();
+  // Destructuring the event.target - https://stackoverflow.com/a/55188322
+  const { title, author, pages } = e.target.elements;
+  // Using the length to act as a 'unique' identifier.
+  addBookToLibrary(myLibrary.length + 1, title.value, author.value, pages.value);
+  e.target.reset();
+};
