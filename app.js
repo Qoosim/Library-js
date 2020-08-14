@@ -38,6 +38,15 @@ const renderToTable = () => {
   });
 }
 
+// const form = document.forms.bookValues
+const form = document.querySelector('form');
+form.onsubmit = (e) => {
+    e.preventDefault();
+    const c = Object.values(form).reduce((obj, field) => { obj[field.name] = field.value; return obj; }, {});
+    console.log(c);
+}
+
+
 
 const removeFromLibrary = (t) => {
 
