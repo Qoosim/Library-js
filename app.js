@@ -64,7 +64,6 @@ const book = ({
     mainRow.appendChild(cell);
 
     cell = document.createElement('td');
-    // cell.classList.add('py-0', 'px-0');
     const deleteLink = document.createElement('a');
     // Add multiple classes - to classList https://stackoverflow.com/a/14432191
     deleteLink.classList.add('btn', 'btn-danger', 'btn-sm');
@@ -81,7 +80,7 @@ const book = ({
   return { render, getBook };
 };
 
-const addBookToLibrary = (
+const addToLibrary = (
   bookId, title, author, pages, readStatus,
 ) => {
   const currBook = book({
@@ -101,6 +100,6 @@ form.onsubmit = (e) => {
     title, author, pages, readStatus,
   } = e.target.elements;
   // Using the length to act as a 'unique' identifier.
-  addBookToLibrary(myLibrary.length + 1, title.value, author.value, pages.value, readStatus.checked);
+  addToLibrary(myLibrary.length + 1, title.value, author.value, pages.value, readStatus.checked);
   e.target.reset();
 };
