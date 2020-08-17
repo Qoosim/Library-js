@@ -32,20 +32,19 @@
 - Webpack 
 - Bootstrap
 - VSCode
-- Rubocop 
 - JSHint
 - Github Actions
 
 ## Live Demo
 
-[Live Demo Link](https://movie-time-zim.herokuapp.com/)
+[Live Demo Link](https://qoosim.github.io/Library-js/)
 
 
 <!-- INSTALLATION -->
 ## Usage
 
 - Visit the live link and enjoy !!! 
-- You can download onto your machine and opening `index.html`.
+- You can download onto your machine and open `index.html`.
   
 ## Authors
 
