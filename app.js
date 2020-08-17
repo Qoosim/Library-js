@@ -64,10 +64,10 @@ const book = ({
     mainRow.appendChild(cell);
 
     cell = document.createElement('td');
-    cell.classList.add('py-0', 'px-0');
+    // cell.classList.add('py-0', 'px-0');
     const deleteLink = document.createElement('a');
     // Add multiple classes - to classList https://stackoverflow.com/a/14432191
-    deleteLink.classList.add('btn', 'btn-danger', 'my-2', 'btn-sm');
+    deleteLink.classList.add('btn', 'btn-danger', 'btn-sm');
     deleteLink.addEventListener('click', (e) => {
       e.preventDefault();
       removeBook(e);
