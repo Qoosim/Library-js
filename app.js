@@ -3,25 +3,18 @@ const myLibrary = [];
 const book = ({
   bookId, title, author, pages, readStatus,
 }) => {
+  const getBook = {
+    bookId, title, author, pages, readStatus,
+  };
+
   const removeBook = (e) => {
-    const currentBookIndex = myLibrary.indexOf({ bookId, title });
-
-    const current1 = e.target.parentElement.parentElement.getAttribute('index');
-    console.log(current1);
-
-    console.log(`Current Index found ${currentBookIndex}`);
-    myLibrary.forEach(v => { console.log(v); });
-    console.log('Current Array before splice complete');
-    myLibrary.splice(currentBookIndex, 1);
-    console.log('Current Array after splice start');
-    myLibrary.forEach(v => { console.log(v); });
-    console.log('Current Array after splice complete');
-    const bookList = document.querySelector('.books-list');
-    bookList.innerHTML = null;
-    myLibrary.forEach((libraryBook) => {
-      const storedBook = book(libraryBook);
-      storedBook.render();
-    });
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+    const selectedBookIndex = myLibrary.filter((v) => (v.bookId === bookId
+      && v.title === title))[0];
+    e.target.parentElement.parentElement.remove();
+    // Added radix parameter to parseInt
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+    myLibrary.splice(parseInt(selectedBookIndex, 10), 1);
   };
 
   const updateRow = (mainRow, innerHTMLText) => {
@@ -33,6 +26,7 @@ const book = ({
   const render = () => {
     const bookList = document.querySelector('.books-list');
     const mainRow = document.createElement('tr');
+    mainRow.setAttribute('index', bookId);
 
     [bookId, title, author, pages].forEach(v => {
       updateRow(mainRow, v);
@@ -40,17 +34,30 @@ const book = ({
 
     let cell = document.createElement('td');
     const toggleButton = document.createElement('button');
-    toggleButton.classList.add('btn', 'btn-sm', 'btn-danger');
-    toggleButton.innerHTML = 'Blebla';
+    toggleButton.classList.add('btn', 'w-50');
+    if (getBook.readStatus) {
+      toggleButton.classList.add('btn-success');
+      toggleButton.classList.remove('btn-danger');
+      toggleButton.innerHTML = 'Yeah!';
+    } else {
+      toggleButton.classList.add('btn-danger');
+      toggleButton.classList.remove('btn-success');
+      toggleButton.innerHTML = 'Nope!';
+    }
 
     toggleButton.addEventListener('click', (e) => {
       e.preventDefault();
-      const currentBookIndex = myLibrary.indexOf({ bookId, title });
-      console.log(currentBookIndex);
-
-
-      toggleButton.classList.add('btn', 'btn-primary');
-      toggleButton.innerHTML = 'Read';
+      if (getBook.readStatus) {
+        getBook.readStatus = false;
+        toggleButton.classList.add('btn-danger');
+        toggleButton.classList.remove('btn-success');
+        toggleButton.innerHTML = 'Nope!';
+      } else {
+        getBook.readStatus = true;
+        toggleButton.classList.add('btn-success');
+        toggleButton.classList.remove('btn-danger');
+        toggleButton.innerHTML = 'Yeah!';
+      }
     });
 
     cell.appendChild(toggleButton);
@@ -71,9 +78,8 @@ const book = ({
     bookList.appendChild(mainRow);
   };
 
-  return { render };
+  return { render, getBook };
 };
-
 
 const addBookToLibrary = (
   bookId, title, author, pages, readStatus,
@@ -81,7 +87,7 @@ const addBookToLibrary = (
   const currBook = book({
     bookId, title, author, pages, readStatus,
   });
-  myLibrary.push(currBook);
+  myLibrary.push(currBook.getBook);
   currBook.render();
 };
 
@@ -95,6 +101,6 @@ form.onsubmit = (e) => {
     title, author, pages, readStatus,
   } = e.target.elements;
   // Using the length to act as a 'unique' identifier.
-  addBookToLibrary(myLibrary.length + 1, title.value, author.value, pages.value, readStatus.value);
+  addBookToLibrary(myLibrary.length + 1, title.value, author.value, pages.value, readStatus.checked);
   e.target.reset();
 };
