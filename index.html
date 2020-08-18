@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Library</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4 text-center">The Awesome Library</h1>
+        <p class="lead text-center">Welcome to the best Browser Based Library</p>
+      </div>
+    </div>
+    <p>
+      <a class="btn btn-primary" data-toggle="collapse" href="#formCollapsible" role="button" aria-expanded="false"
+        aria-controls="formCollapsible">
+        Add a new book
+      </a>
+    </p>
+    <div class="collapse" id="formCollapsible">
+      <div class="card card-body">
+        <form class="form-inline" id="bookValues">
+          <div class="form-group mx-sm-1 mb-2">
+            <label for="title" class="sr-only">Title</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
+          </div>
+          <div class="form-group mx-sm-1 mb-2">
+            <label for="author" class="sr-only">Author</label>
+            <input type="text" class="form-control" name="author" id="author" placeholder="Author" required>
+          </div>
+          <div class="form-group mx-sm-1 mb-2">
+            <label for="pages" class="sr-only">Pages</label>
+            <input type="number" class="form-control" id="pages" name="pages" placeholder="Pages" required>
+          </div>
+          <div class="form-check  mb-2 font-weight-bold">
+            <label class="form-check-label mr-1 ml-2" for="readStatus">I read this book already. </label>
+            <input class="form-check-input text-center" type="checkbox" value="" id="readStatus" name="readStatus">
+          </div>
+          <div class="form-group ml-auto">
+            <button type="submit" class="btn btn-primary mb-2">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">S/N</th>
+          <th scope="col">Book Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Pages</th>
+          <th scope="col">Read?</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody class='books-list'></tbody>
+    </table>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
